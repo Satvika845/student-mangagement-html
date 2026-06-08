@@ -1,8 +1,8 @@
 nav{
-    background-color:black;
-    height:30px;
+    background-color:rgb(218, 103, 107);
+    height:50px;
     margin: 0px;
-    padding-top: 10px;
+    padding-top: 5px;
 
 }
 
@@ -46,7 +46,7 @@ form{
         button{
             width: 100%;
             padding: 10px;
-            background-color: red;
+            background-color: rgb(224, 127, 127);
             color: white;
             border: none;
             border-radius: 5px;
@@ -59,7 +59,7 @@ form{
         th
         {
             text-align: center;
-            background-color: rgb(119, 61, 61);
+            background-color: lightpink
 
         }
         table{
@@ -73,4 +73,4 @@ form{
          tr:nth-child(odd){
              text-align: center;
              background-color: lightsalmon;
-        }s
+        }

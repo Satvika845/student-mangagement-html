@@ -3,57 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-      <link rel="stylesheet" href="style.css">
+    <title>Student List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-     <nav>
-         <a href="dashboard.html">Dashboard</a>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
         <a href="add-student.html">Add Student</a>
         <a href="view-student.html">View Student</a>
         <a href="logout.html">Logout</a>
-
     </nav>
+
     <h1>Student List</h1>
+
     <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
         <tr>
             <th>Name</th>
-            <th>RollNo</th>
+            <th>Roll No</th>
             <th>Branch</th>
-            <th>Cgpa</th>
+            <th>CGPA</th>
+            <th>Actions</th>
         </tr>
+    </thead>
+
+    <tbody id="studentTable">
         <tr>
             <td>Satvika</td>
             <td>23B81A05MR</td>
             <td>CSE</td>
             <td>9.3</td>
+            <td>
+                <button>Edit</button>
+                
+                <button>Delete</button>
+            </td>
         </tr>
-        <tr>
-            <td>Sara</td>
-            <td>23B81A05MQ</td>
-            <td>CSE</td>
-            <td>9.1</td>
-        </tr>
-         <tr>
-            <td>Vara</td>
-            <td>23B81A05MS</td>
-            <td>CSE</td>
-            <td>9.0</td>
-        </tr>
-         <tr>
-            <td>Nikki</td>
-            <td>23B81A05MT</td>
-            <td>CSE</td>
-            <td>7.6</td>
-        </tr>
-         <tr>
-            <td>Laxmi</td>
-            <td>23B81A05MU</td>
-            <td>CSE</td>
-            <td>9.3</td>
-        </tr>
-    </table>
+    </tbody>
+</table>
+<script>
+let students = JSON.parse(localStorage.getItem("students")) || [];
 
-    
+function displayStudents() {
+    let table = document.getElementById("studentTable");
+
+    table.innerHTML = "";
+
+    students.forEach((student, index) => {
+        table.innerHTML += `
+        <tr>
+            <td>${student.name}</td>
+            <td>${student.rollno}</td>
+            <td>${student.branch}</td>
+            <td>${student.cgpa}</td>
+            <td>
+                <button onclick="editStudent(${index})">Edit</button>
+                <br>
+                <button onclick="deleteStudent(${index})">Delete</button>
+            </td>
+        </tr>`;
+    });
+}
+
+function deleteStudent(index) {
+    students.splice(index, 1);
+    localStorage.setItem("students", JSON.stringify(students));
+    displayStudents();
+}
+
+function editStudent(index) {
+    let name = prompt("Enter Name", students[index].name);
+    let rollno = prompt("Enter Roll No", students[index].rollno);
+    let branch = prompt("Enter Branch", students[index].branch);
+    let cgpa = prompt("Enter CGPA", students[index].cgpa);
+
+    if (name && rollno && branch && cgpa) {
+        students[index] = {
+            name,
+            rollno,
+            branch,
+            cgpa
+        };
+
+        localStorage.setItem("students", JSON.stringify(students));
+        displayStudents();
+    }
+}
+
+displayStudents();
+</script>
 </body>
 </html>
